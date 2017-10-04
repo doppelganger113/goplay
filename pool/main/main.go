@@ -1,39 +1,68 @@
 package main
 
 import (
-	"github.com/doppelganger113/goplay/runner"
-	"time"
+	"github.com/doppelganger113/goplay/pool"
 	"log"
-	"os"
+	"io"
+	"sync/atomic"
+	"sync"
+	"time"
+	"math/rand"
 )
 
-const timeout = 3 * time.Second
+const (
+	maxGoroutines   = 25
+	pooledResources = 2
+)
 
-func main() {
-	r := runner.New(timeout)
-	r.Add(
-		createTask(),
-		createTask(),
-		createTask(),
-	)
+var idCounter int32
 
-	if err := r.Start(); err != nil {
-		switch err {
-		case runner.ErrTimeout:
-			log.Println("Terminating due to timeout.")
-			os.Exit(1)
-		case runner.ErrInterupt:
-			log.Println("Terminating due to interrupt")
-			os.Exit(2)
-		}
-	}
-
-	log.Println("Process ended.")
+type dbConnection struct {
+	ID int32
 }
 
-func createTask() func(int) {
-	return func(id int) {
-		log.Printf("Processor ~ Task #%d.", id)
-		time.Sleep(time.Duration(id) * time.Second)
+func (con *dbConnection) Close() error {
+	log.Println("Close: Connection", con.ID)
+	return nil
+}
+
+func createConnection() (io.Closer, error) {
+	id := atomic.AddInt32(&idCounter, 1)
+	log.Println("Create: New Connection", id)
+
+	return &dbConnection{id}, nil
+}
+
+func performQueries(query int, p *pool.Pool) {
+	conn, err := p.Acquire()
+	if err != nil {
+		log.Println(err)
+		return
 	}
+
+	defer p.Release(conn)
+
+	time.Sleep(time.Duration(rand.Intn(1000)) * time.Millisecond)
+	log.Printf("QID[%d] CID[%d]\n", query, conn.(*dbConnection).ID)
+}
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(maxGoroutines)
+
+	p, err := pool.New(createConnection, pooledResources)
+	if err != nil {
+		log.Println(err)
+	}
+
+	for query := 0; query < maxGoroutines; query++ {
+		go func(q int) {
+			performQueries(q, p)
+			wg.Done()
+		}(query)
+	}
+
+	wg.Wait()
+	log.Println("Shutting down program.")
+	p.Close()
 }
