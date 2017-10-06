@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/doppelganger113/goplay/runner"
+	"github.com/doppelganger113/goplay/concurrency/runner"
 	"time"
 	"log"
 	"os"

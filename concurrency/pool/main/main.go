@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/doppelganger113/goplay/pool"
+	"github.com/doppelganger113/goplay/concurrency/pool"
 	"log"
 	"io"
 	"sync/atomic"
