@@ -1,3 +1,4 @@
+// Package handlers provides the endpoints for the web servers
 package handlers
 
 import (
@@ -5,10 +6,12 @@ import (
 	"encoding/json"
 )
 
+// Registers the routes with the web server
 func Register() {
 	http.HandleFunc("/people", People)
 }
 
+// Returns a single person json document
 func People(rw http.ResponseWriter, r *http.Request) {
 	u := struct {
 		Name  string
