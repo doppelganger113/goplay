@@ -1,2 +1,2 @@
 # goplay
-Go playground containing different packages
+Go playground for practice and examples
