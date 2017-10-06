@@ -13,7 +13,7 @@ func People(rw http.ResponseWriter, r *http.Request) {
 	u := struct {
 		Name  string
 		Email string
-	}{"Bill", "bill@gmail.com"}
+	}{"bill", "bill@gmail.com"}
 
 	rw.Header().Set("Content-Type", "application/json")
 	rw.WriteHeader(http.StatusOK)
