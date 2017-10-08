@@ -11,6 +11,7 @@ Simple Go playground for practice and examples
 - concurrency
     - pool
     - runner
+    - work
 - json_example
 - tests
     - request_mock
