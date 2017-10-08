@@ -15,5 +15,6 @@ Simple Go playground for practice and examples
 - json_example
 - tests
     - request_mock
-    - request_mock_2 
+    - request_mock_2
+    - interactions
 ```
