@@ -15,6 +15,7 @@ jobs:
         - go get github.com/doppelganger113/goplay/concurrency/pool
         - go get github.com/doppelganger113/goplay/concurrency/runner
         - go get github.com/doppelganger113/goplay/concurrency/work
+        - go get github.com/doppelganger113/goplay/tests/interactions
 
     #### TEMPLATE_NOTE: go expects specific checkout path representing url
     #### expecting it in the form of
