@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"regexp"
+	"github.com/doppelganger113/goplay/examples/network_example/search"
 )
 
 type (
