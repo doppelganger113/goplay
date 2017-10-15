@@ -12,7 +12,9 @@ Simple Go playground for practice and examples
     - pool
     - runner
     - work
-- json_example
+- examples
+    - json
+    - network_example
 - tests
     - request_mock
     - request_mock_2
