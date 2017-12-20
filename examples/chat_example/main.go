@@ -20,7 +20,7 @@ func main() {
 	http.Handle("/room", r)
 
 	log.Print("Started room")
-	go r.run()
+	go r.Run()
 
 	log.Print("Starting webserver on ", *addr)
 	if err := http.ListenAndServe(*addr, nil); err != nil {

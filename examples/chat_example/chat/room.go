@@ -19,10 +19,10 @@ type room struct {
 	leave   chan *client
 	join    chan *client
 	clients map[*client]bool
-	Trace  trace.Tracer
+	Trace   trace.Tracer
 }
 
-func (r *room) run() {
+func (r *room) Run() {
 	for {
 		select {
 		case client := <-r.join:
