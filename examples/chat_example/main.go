@@ -14,7 +14,7 @@ func main() {
 	var addr = flag.String("addr", ":3000", "The addr of the application")
 	flag.Parse()
 	r := chat.NewRoom()
-	r.Trace = trace.New(os.Stdout)
+	r.Tracer = trace.New(os.Stdout)
 
 	http.Handle("/", chat.NewTemplateHandler("chat.html"))
 	http.Handle("/room", r)

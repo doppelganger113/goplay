@@ -19,7 +19,7 @@ type room struct {
 	leave   chan *client
 	join    chan *client
 	clients map[*client]bool
-	Trace   trace.Tracer
+	Tracer   trace.Tracer
 }
 
 func (r *room) Run() {
@@ -27,16 +27,16 @@ func (r *room) Run() {
 		select {
 		case client := <-r.join:
 			r.clients[client] = true
-			r.tracer.Trace("New client joined")
+			r.Tracer.Trace("New client joined")
 		case client := <-r.leave:
 			delete(r.clients, client)
 			close(client.send)
-			r.tracer.Trace("Client left")
+			r.Tracer.Trace("Client left")
 		case msg := <-r.forward:
-			r.tracer.Trace("Message received: ", msg)
+			r.Tracer.Trace("Message received: ", msg)
 			for client := range r.clients {
 				client.send <- msg
-				r.tracer.Trace("--sent to client")
+				r.Tracer.Trace("--sent to client")
 			}
 		}
 	}
