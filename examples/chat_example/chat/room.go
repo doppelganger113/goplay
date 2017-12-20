@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/websocket"
 	"net/http"
 	"log"
+	"goplay/examples/chat_example/trace"
 )
 
 const (
@@ -18,6 +19,7 @@ type room struct {
 	leave   chan *client
 	join    chan *client
 	clients map[*client]bool
+	tracer  trace.Tracer
 }
 
 func (r *room) run() {
@@ -25,18 +27,22 @@ func (r *room) run() {
 		select {
 		case client := <-r.join:
 			r.clients[client] = true
+			r.tracer.Trace("New client joined")
 		case client := <-r.leave:
 			delete(r.clients, client)
 			close(client.send)
+			r.tracer.Trace("Client left")
 		case msg := <-r.forward:
+			r.tracer.Trace("Message received: ", msg)
 			for client := range r.clients {
 				client.send <- msg
+				r.tracer.Trace("--sent to client")
 			}
 		}
 	}
 }
 
-func newRoom() *room {
+func NewRoom() *room {
 	return &room{
 		forward: make(chan []byte),
 		join:    make(chan *client),

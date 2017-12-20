@@ -4,13 +4,15 @@ import (
 	"net/http"
 	"log"
 	"flag"
+	"github.com/doppelganger113/goplay/examples/chat_example/chat"
 )
 
 func main() {
 
 	var addr = flag.String("addr", ":3000", "The addr of the application")
 	flag.Parse()
-	r := newRoom()
+	r := chat.NewRoom()
+	r.tracer
 
 	http.Handle("/", &templateHandler{filename: "chat.html"})
 	http.Handle("/room", r)
