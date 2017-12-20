@@ -33,7 +33,7 @@ func (r *room) Run() {
 			close(client.send)
 			r.Tracer.Trace("Client left")
 		case msg := <-r.forward:
-			r.Tracer.Trace("Message received: ", msg)
+			r.Tracer.Trace("Message received: ", string(msg))
 			for client := range r.clients {
 				client.send <- msg
 				r.Tracer.Trace("--sent to client")
