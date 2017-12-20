@@ -4,7 +4,7 @@ import (
 	"github.com/gorilla/websocket"
 	"net/http"
 	"log"
-	"goplay/examples/chat_example/trace"
+	"github.com/doppelganger113/goplay/examples/chat_example/trace"
 )
 
 const (
@@ -19,7 +19,7 @@ type room struct {
 	leave   chan *client
 	join    chan *client
 	clients map[*client]bool
-	tracer  trace.Tracer
+	Trace  trace.Tracer
 }
 
 func (r *room) run() {
