@@ -9,6 +9,14 @@ type tracer struct {
 	out io.Writer
 }
 
+type nilTracer struct{}
+
+func (t *nilTracer) Trace(a ...interface{}) {}
+
+func Off() Tracer {
+	return &nilTracer{}
+}
+
 type Tracer interface {
 	Trace(...interface{})
 }
