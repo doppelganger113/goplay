@@ -13,6 +13,7 @@ Simple Go playground for practice and examples
     - runner
     - work
 - examples
+    - cchat_example
     - json
     - network_example
 - tests
