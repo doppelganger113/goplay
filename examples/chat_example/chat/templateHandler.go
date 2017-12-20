@@ -19,3 +19,9 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	})
 	t.template.Execute(w, r)
 }
+
+func NewTemplateHandler(filename string) *templateHandler {
+	return &templateHandler{
+		filename: filename,
+	}
+}
