@@ -1,8 +1,8 @@
 package trace
 
 import (
-	"io"
 	"fmt"
+	"io"
 )
 
 type tracer struct {

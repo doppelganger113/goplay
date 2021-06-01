@@ -1,10 +1,10 @@
 package runner
 
 import (
-	"os"
 	"errors"
-	"time"
+	"os"
 	"os/signal"
+	"time"
 )
 
 type Runner struct {

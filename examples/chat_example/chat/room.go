@@ -2,9 +2,9 @@ package chat
 
 import (
 	"github.com/gorilla/websocket"
-	"net/http"
+	"goplay.com/m/v2/examples/chat_example/trace"
 	"log"
-	"github.com/doppelganger113/goplay/examples/chat_example/trace"
+	"net/http"
 )
 
 const (

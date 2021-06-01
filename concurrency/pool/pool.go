@@ -1,14 +1,14 @@
 package pool
 
 import (
-	"sync"
-	"io"
 	"errors"
+	"io"
 	"log"
+	"sync"
 )
 
 type Pool struct {
-	m         sync.Mutex
+	sync.Mutex
 	resources chan io.Closer
 	factory   func() (io.Closer, error)
 	closed    bool
@@ -31,13 +31,11 @@ func (p *Pool) Acquire() (io.Closer, error) {
 	select {
 	case r, ok := <-p.resources:
 		log.Println("Acquire:", "Shared resource")
-
 		if !ok {
 			return nil, ErrPoolClosed
 		}
 
 		return r, nil
-
 	default:
 		log.Println("Acquired:", "New resource")
 		return p.factory()
@@ -45,8 +43,8 @@ func (p *Pool) Acquire() (io.Closer, error) {
 }
 
 func (p *Pool) Release(r io.Closer) {
-	p.m.Lock()
-	defer p.m.Unlock()
+	p.Lock()
+	defer p.Unlock()
 
 	if p.closed {
 		r.Close()
@@ -63,8 +61,8 @@ func (p *Pool) Release(r io.Closer) {
 }
 
 func (p *Pool) Close() {
-	p.m.Lock()
-	defer p.m.Unlock()
+	p.Lock()
+	defer p.Unlock()
 
 	if p.closed {
 		return

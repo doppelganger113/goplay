@@ -1,10 +1,10 @@
 package main
 
 import (
-	"net/http"
-	"log"
 	"encoding/json"
 	"fmt"
+	"log"
+	"net/http"
 )
 
 const api string = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty"

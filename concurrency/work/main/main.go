@@ -1,10 +1,10 @@
 package main
 
 import (
+	"goplay.com/m/v2/concurrency/work"
 	"log"
-	"time"
-	"github.com/doppelganger113/goplay/concurrency/work"
 	"sync"
+	"time"
 )
 
 var names = []string{

@@ -1,10 +1,10 @@
 package chat
 
 import (
-	"sync"
+	"html/template"
 	"net/http"
 	"path/filepath"
-	"html/template"
+	"sync"
 )
 
 type templateHandler struct {
@@ -17,7 +17,7 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	t.once.Do(func() {
 		t.template = template.Must(template.ParseFiles(filepath.Join("templates", t.filename)))
 	})
-	t.template.Execute(w, r)
+	_ = t.template.Execute(w, r)
 }
 
 func NewTemplateHandler(filename string) *templateHandler {

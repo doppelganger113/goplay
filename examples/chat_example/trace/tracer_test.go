@@ -1,8 +1,8 @@
 package trace
 
 import (
-	"testing"
 	"bytes"
+	"testing"
 )
 
 func TestNew(t *testing.T) {

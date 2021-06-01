@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/doppelganger113/goplay/concurrency/runner"
-	"time"
+	"goplay.com/m/v2/concurrency/runner"
 	"log"
 	"os"
+	"time"
 )
 
 const timeout = 3 * time.Second

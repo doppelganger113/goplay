@@ -1,11 +1,11 @@
 package main
 
 import (
-	"net/http"
-	"log"
 	"flag"
-	"github.com/doppelganger113/goplay/examples/chat_example/chat"
-	"github.com/doppelganger113/goplay/examples/chat_example/trace"
+	"goplay.com/m/v2/examples/chat_example/chat"
+	"goplay.com/m/v2/examples/chat_example/trace"
+	"log"
+	"net/http"
 	"os"
 )
 

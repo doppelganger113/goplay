@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/doppelganger113/goplay/concurrency/pool"
-	"log"
+	"goplay.com/m/v2/concurrency/pool"
 	"io"
-	"sync/atomic"
-	"sync"
-	"time"
+	"log"
 	"math/rand"
+	"sync"
+	"sync/atomic"
+	"time"
 )
 
 const (
