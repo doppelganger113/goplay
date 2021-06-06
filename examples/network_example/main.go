@@ -1,10 +1,9 @@
 package main
 
 import (
+	"goplay.com/m/v2/examples/network_example/search"
 	"log"
 	"os"
-	_ "github.com/doppelganger113/goplay/examples/network_example/matchers"
-	"github.com/doppelganger113/goplay/examples/network_example/search"
 )
 
 // init is called prior to main.
